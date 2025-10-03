@@ -3,12 +3,10 @@
 
 ## Part 1
 
+Links to data in S3 :
+Source Code : Source Code : population.ipynb
 
-BLS Data Sync to S3
-
-S3 Data Links :
-
-pr.series
+- [pr.series](https://rearc-data-quest-ssm.s3.us-east-2.amazonaws.com/bls/pr/pr.series)
 pr.txt
 pr.measure
 pr.period
@@ -20,21 +18,23 @@ pr.contacts
 pr.data.0.Current
 pr.data.1.AllData
 pr.class
-Source Code : bls_pr_sync.py
 
-Public datasets are fetched from BLS URL and published to rearc-data-quest-ssm S3 bucket. The sync script ensures:
 
-Files are dynamically discovered
-Duplicates are avoided
-Files are streamed directly to S3 without local storage
-Setup does not throw 403 error and is compliant with BLS data access policies
-S3 Bucket Configurations
+## Gist on what the script is doing and my bucket configs and why I chose those configurations, mention tag if used. Paste an image output of this s3 bucket.
 
-Chose General Purpose Bucket
-Added a RearcDataQuest project tag
-Enabled versioning for traceability and rollbacks
-Used SSE-S3 for encryption (since its safe for public data). Will switch to SSE-KMS for sensitive data.
-Future Optimization Ideas
+Public datasets are fetched from BLS URL and published to `rearc-data-quest-ssm` S3 bucket. The sync script ensures:
+- Files are dynamically discovered
+- Duplicates are avoided
+- Files are streamed directly to S3 without local storage
+- Setup does not throw 403 error and is compliant with BLS data access policies
+
+**S3 Bucket Configurations**
+- Chose General Purpose Bucket
+- Added a RearcDataQuest project tag
+- Enabled versioning for traceability and rollbacks
+- Used SSE-S3 for encryption (since its safe for public data). Will switch to SSE-KMS for sensitive data.
+
+## If I had time, I will?
 
 I would add recursive search for nested directores inside the pr/ directory. Currently the script parses the flat directory at /pub/time.series/pr/ but I would implement recursive traversal for potential subfolders within pr/ path
 I would use retry strategy for request Session. This would enable automatic retries on time-out issues or other common network errors.
@@ -45,24 +45,20 @@ Upload Result
 
 
 
-
 ## Part 2
+Source Code : population.ipynb
 
-Source Code : api_to_s3.py
-S3 Data Link : nation_population.json
+Link to data in S3 : nation_population.json
 
-Population data is fetched from the given API endpoint and is stored as nation_population.json in usa-api-sync/population/ bucket in S3
-
-The S3 bucket configurations are same as Part 1.
-
-Future Optimization Ideas
+Future Continous Improvement (Find synonym)
 
 Since Part 1 and Part 2 have the same functionality, I would implement the enhancements listed in part 1 like retry for request Session, have a metadata logging file and possibly include a staging area
-Upload Result
 
 
 ## Part 3
-Performed data analysis and answered questions
+
+## CHANGE FORMAT AND VALUES 
+
 
 Source Code : population.ipynb
 
@@ -81,8 +77,13 @@ Filtered pr.data.0.Current for series_id = PRS30006032 and period = Q01
 Right merge population dataset on year column
 
 ## Part 4
+
+## CHANGE PIPELINE NAME
+
 # **Infrastructure as Code (IaC) and Automated Data Pipeline (CDK)** 
-CDK IaC Source Code : [CDK Stack](./part4_aws_cdk/part4_aws_cdk_stack.py)    
+Source Code : [CDK Stack](./part4_aws_cdk/part4_aws_cdk_stack.py)    
+
+# MENTION TAGGING 
 
 ( All resources for this pipeline can be identified using tags: `Project: RearcDataQuest` and `Environment: dev`)
 
@@ -104,6 +105,8 @@ Built a serverless data pipeline using CDK that automates:
 - Event-driven data processing using SQS and Lambda (Part 3)
   - Analysis Lambda function Source Code : [Analysis Lambda Function](./lambda_functions/data_analysis/lambda_func.py)
 
+## REMOVE TABLE 
+
 **Pipeline Architecture**  
 | Resource | Purpose |
 |----------|---------|
@@ -112,6 +115,8 @@ Built a serverless data pipeline using CDK that automates:
 | EventBridge Rule | Triggers ingestion Lambda daily |
 | SQS Queue | Gets triggered when new population JSON is uploaded to S3 |
 | Lambda (Analytics) | Processes messages from SQS, reads both datasets, and logs analysis |
+
+## DON'T INCLUDE ALL
 
 **Pipeline Flow (Implemented)**  
 - **Daily Data Ingestion**: EventBridge triggers a Lambda function daily to fetch BLS data and population data from APIs, storing both datasets in S3 under separate prefixes.
@@ -127,6 +132,8 @@ Built a serverless data pipeline using CDK that automates:
 - **Security and Network Isolation**: I would deploy infrastructure in private `VPC` subnets for improved security and compliance
 
  ![Enhanced_Pipeline](/resources/Enhanced_Part4_Pipeline.png) 
+
+## TAKE SCREENSHOTS FOR PROOF OF EXECUTION AND PUT IT IN SEPERATE FOLDER AND LINK THEM HERE
 
 **Outputs & Proof of Execution**  
 I have included a pipeline architecture diagram based on the resources deployed by the CDK infrastructure. For verification of specific resource configurations, all CDK output images are available in the [resources](/resources) folder with the `Part4` prefix.
