@@ -10,4 +10,3 @@ The S3 bucket configurations are same as Part 1.
 - Since Part 1 and Part 2 have the same functionality, I would implement the enhancements listed in `part 1` like retry for request Session, have a metadata logging file and possibly include a staging area
 
 **Upload Result**
-![BLS_data_bucket](/resources/nation_population_bucket.png)
