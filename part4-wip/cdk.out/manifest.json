@@ -1,0 +1,227 @@
+{
+  "version": "36.0.0",
+  "artifacts": {
+    "PipelineStack.assets": {
+      "type": "cdk:asset-manifest",
+      "properties": {
+        "file": "PipelineStack.assets.json",
+        "requiresBootstrapStackVersion": 6,
+        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
+      }
+    },
+    "PipelineStack": {
+      "type": "aws:cloudformation:stack",
+      "environment": "aws://unknown-account/unknown-region",
+      "properties": {
+        "templateFile": "PipelineStack.template.json",
+        "terminationProtection": false,
+        "validateOnSynth": false,
+        "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-deploy-role-${AWS::AccountId}-${AWS::Region}",
+        "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-cfn-exec-role-${AWS::AccountId}-${AWS::Region}",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/a15b6dd8e7c93811cc096c504a7b09e8416864a0fa538a1d3141774fcc6b861c.json",
+        "requiresBootstrapStackVersion": 6,
+        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
+        "additionalDependencies": [
+          "PipelineStack.assets"
+        ],
+        "lookupRole": {
+          "arn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-lookup-role-${AWS::AccountId}-${AWS::Region}",
+          "requiresBootstrapStackVersion": 8,
+          "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
+        }
+      },
+      "dependencies": [
+        "PipelineStack.assets"
+      ],
+      "metadata": {
+        "/PipelineStack/wipBucket/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "wipBucket23716F22"
+          }
+        ],
+        "/PipelineStack/wipBucket/Policy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "wipBucketPolicy755B23CB"
+          }
+        ],
+        "/PipelineStack/wipBucket/AutoDeleteObjectsCustomResource/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "wipBucketAutoDeleteObjectsCustomResource70C643C9"
+          }
+        ],
+        "/PipelineStack/wipBucket/Notifications/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "wipBucketNotificationsB31E2F42"
+          }
+        ],
+        "/PipelineStack/LatestNodeRuntimeMap": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "LatestNodeRuntimeMap"
+          }
+        ],
+        "/PipelineStack/Custom::S3AutoDeleteObjectsCustomResourceProvider/Role": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CustomS3AutoDeleteObjectsCustomResourceProviderRole3B1BD092"
+          }
+        ],
+        "/PipelineStack/Custom::S3AutoDeleteObjectsCustomResourceProvider/Handler": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CustomS3AutoDeleteObjectsCustomResourceProviderHandler9D90184F"
+          }
+        ],
+        "/PipelineStack/IngestFn/ServiceRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "IngestFnServiceRoleCDCC94EA"
+          }
+        ],
+        "/PipelineStack/IngestFn/ServiceRole/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "IngestFnServiceRoleDefaultPolicy2D066896"
+          }
+        ],
+        "/PipelineStack/IngestFn/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "IngestFnEE15D018"
+          }
+        ],
+        "/PipelineStack/IngestFn/LogRetention/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "IngestFnLogRetentionFCF03FF5"
+          }
+        ],
+        "/PipelineStack/LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8a/ServiceRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aServiceRole9741ECFB"
+          }
+        ],
+        "/PipelineStack/LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8a/ServiceRole/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aServiceRoleDefaultPolicyADDA7DEB"
+          }
+        ],
+        "/PipelineStack/LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8a/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aFD4BFC8A"
+          }
+        ],
+        "/PipelineStack/wipQueue/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "wipQueue853EE459"
+          }
+        ],
+        "/PipelineStack/wipQueue/Policy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "wipQueuePolicy63A88D62"
+          }
+        ],
+        "/PipelineStack/DailySchedule/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "DailySchedule68BF5767"
+          }
+        ],
+        "/PipelineStack/DailySchedule/AllowEventRulePipelineStackIngestFnD4847CA8": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "DailyScheduleAllowEventRulePipelineStackIngestFnD4847CA8A2878171"
+          }
+        ],
+        "/PipelineStack/BucketNotificationsHandler050a0587b7544547bf325f094a3db834/Role/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "BucketNotificationsHandler050a0587b7544547bf325f094a3db834RoleB6FB88EC"
+          }
+        ],
+        "/PipelineStack/BucketNotificationsHandler050a0587b7544547bf325f094a3db834/Role/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "BucketNotificationsHandler050a0587b7544547bf325f094a3db834RoleDefaultPolicy2CF63D36"
+          }
+        ],
+        "/PipelineStack/BucketNotificationsHandler050a0587b7544547bf325f094a3db834/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "BucketNotificationsHandler050a0587b7544547bf325f094a3db8347ECC3691"
+          }
+        ],
+        "/PipelineStack/ReportFn/ServiceRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ReportFnServiceRole564876F9"
+          }
+        ],
+        "/PipelineStack/ReportFn/ServiceRole/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ReportFnServiceRoleDefaultPolicy07A4ACF9"
+          }
+        ],
+        "/PipelineStack/ReportFn/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ReportFnA6F5CCA6"
+          }
+        ],
+        "/PipelineStack/ReportFn/LogRetention/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ReportFnLogRetentionDDDDC9D0"
+          }
+        ],
+        "/PipelineStack/ReportFn/SqsEventSource:PipelineStackwipQueue5F9B3307/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ReportFnSqsEventSourcePipelineStackwipQueue5F9B33077D090406"
+          }
+        ],
+        "/PipelineStack/CDKMetadata/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CDKMetadata"
+          }
+        ],
+        "/PipelineStack/CDKMetadata/Condition": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CDKMetadataAvailable"
+          }
+        ],
+        "/PipelineStack/BootstrapVersion": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "BootstrapVersion"
+          }
+        ],
+        "/PipelineStack/CheckBootstrapVersion": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CheckBootstrapVersion"
+          }
+        ]
+      },
+      "displayName": "PipelineStack"
+    },
+    "Tree": {
+      "type": "cdk:tree",
+      "properties": {
+        "file": "tree.json"
+      }
+    }
+  }
+}
