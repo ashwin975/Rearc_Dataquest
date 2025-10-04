@@ -2,7 +2,7 @@
 
 A hands-on, end-to-end data engineering project that ingests public datasets, lands them in S3, and runs a lightweight serverless pipeline (Lambdas, SQS, EventBridge) provisioned via AWS CDK.
 
-## Table of Contents
+## Contents
 - [Overview](#overview)
 - [Setup & Usage](#setup--usage)
   - [Part 1 — BLS Data → S3](#part-1--bls-data--s3)
@@ -11,25 +11,22 @@ A hands-on, end-to-end data engineering project that ingests public datasets, la
   - [Part 4 — IaC with AWS CDK](#part-4--iac-with-aws-cdk)
 - [Proof of Execution](#proof-of-execution)
 - [Operational Notes](#operational-notes)
-- [Roadmap](#roadmap)
 
-## Overview
-This repository demonstrates:
+## Context Overview
 
 - **Automated ingestion** of public datasets (BLS *time.series/pr* and a population dataset)
 - **Durable landing** in an S3 Buckets and server-side encryption (Could Haves - 
 - **Event-driven processing** using S3 notifications → SQS → Lambda.
 - **Infrastructure as Code** using AWS CDK to define and deploy the pipeline.
 
-> Could Haves -
->   1. **Versioning** - S3 Buckets (Benefits: Roll Backs, Audit Trail) 
->   2. **Tags:** All resources are tagged for discoverability, e.g. `Project: RearcDataQuest`, `Environment: dev`. (Benefits - Cost Monitor, Data Governance)
-
 ### Part 1 — BLS Data → S3
 **Goal:** Republish the BLS time.series/pr dataset to S3 and keep the S3 copy in sync with the source (no hard‑coded filenames, no duplicate uploads).
 
+Source Code : [population.ipynb](https://github.com/ashwin975/Rearc_Dataquest/blob/main/Part%201/Part-1.ipynb)
+
+**Description**: The Python script that lists files under BLS time.series/pr, streams each file, and uploads it to s3 Bucket without using local temp storage. The script skips keys that already exist (to avoid duplicates on re-runs) and logs attempted/skipped/uploaded counts for validation.
+
 Links to data in S3 :
-Source Code : Source Code : population.ipynb
 
 - [pr.series](https://rearc-data-quest-ssm.s3.us-east-2.amazonaws.com/bls/pr/pr.series)
 pr.txt
@@ -44,12 +41,11 @@ pr.data.0.Current
 pr.data.1.AllData
 pr.class
 
-## Gist on what the script is doing and my bucket configs and why I chose those configurations, mention tag if used. Paste an image output of this s3 bucket.
-
 **Highlights**
 Public datasets are fetched from BLS URL and published to `rearc-data-quest-ssm` S3 bucket. The sync script ensures:
 - Dynamic file discovery (no hard-coded filenames)
 - Duplicate-aware uploads (hash check)
+- Prefix bls/pr/ to organize objects cleanly and enable simple lifecycle rules down the road.
 - Streamed I/O (no local disk usage)
 - Setup does not throw 403 error and is compliant with BLS data access policies
 
@@ -68,11 +64,12 @@ I would also add more file validation techniques. Currently the script only comp
 I would include a staging area like a \tmp folder to preprocess files or enable batch processing (If the files need to be zipped before upload or in other scenarios). But as of now, the script directly streams data into S3 since it is ideal for lightweight public datasets.
 Upload Result
 
-
 ## Part 2
 **Goal**: Fetch national population data from the DataUSA API and save the response as nation_population.json in S3.
 
-Source Code : population.ipynb
+Source Code : [population.ipynb](https://github.com/ashwin975/Rearc_Dataquest/blob/main/part2/api_call.py)
+
+**Description**: The Python script requests national population data from the public API and writes the raw JSON to S3 Bucket. The script uses a simple request header, performs a basic non-empty payload check, and also logs whether the object was created or updated.
 
 Link to data in S3 : nation_population.json
 
