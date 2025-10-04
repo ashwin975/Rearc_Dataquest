@@ -1,5 +1,31 @@
 # Rearc Data Quest
 
+Table of Contents
+
+Overview
+
+Architecture
+
+Repository Structure
+
+Prerequisites
+
+Setup & Usage
+
+Part 1 — BLS Data → S3
+
+Part 2 — Population API → S3
+
+Part 3 — Analysis & Joins
+
+Part 4 — IaC with AWS CDK
+
+Proof of Execution
+
+Operational Notes
+
+Roadmap
+
 
 ## Part 1
 
