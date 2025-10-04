@@ -65,7 +65,7 @@ Public datasets are fetched from BLS URL and published to S3 bucket. The sync sc
 - Can also include a staging area (like a /tmp folder) for preprocessing or batch operations when files need to be compressed or transformed, though the current approach of streaming directly to S3 works great for these lightweight public datasets
 - Setup observability hooks to send summary metrics (files_seen, files_uploaded, bytes_transferred, duration_ms) to CloudWatch at the end of each run for better monitoring and operational visibility
 
-### Part 2
+### Part 2 — Population API → S3
 **Goal**: Fetch national population data via API and save the response as nation_population.json in S3.
 
 Source Code : [population.ipynb](https://github.com/ashwin975/Rearc_Dataquest/blob/main/part2/api_call.py)
@@ -77,7 +77,7 @@ Link to data in S3 : [nation_population.json](https://api-call-ashwin.s3.us-east
 ### Enhancements
 Similar enhancements as in Part 1 would be sufficient
 
-### Part 3
+### Part 3 — Analysis & Joins
 **Goal**: US population mean & standard deviation for 2013–2018, find the best year (max annual sum of value) per series_id in pr.data.0.Current, and join to report value for series_id=PRS30006032, period=Q01 with population for that year.
 
 Source Code : [population.ipynb](https://github.com/ashwin975/Rearc_Dataquest/blob/main/part%203/data_analysis.ipynb)
@@ -100,7 +100,7 @@ Right join - merged population dataset on year column
 
 ### Enhancements
 
-## Part 4
+## Part 4 — IaC with AWS CDK
 **Goal**: Automate the pipeline with IaC (CloudFormation/CDK/Terraform): schedule a Lambda to run Parts 1 & 2 daily, publish an SQS message when the JSON lands in S3, and trigger a Lambda that runs the Part 3 reports (logging results is sufficient).
 
 ## CHANGE PIPELINE NAME
