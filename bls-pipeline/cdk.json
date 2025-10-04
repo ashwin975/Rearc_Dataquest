@@ -1,0 +1,7 @@
+{
+  "app": "python3 app.py",
+  "context": {
+    "@aws-cdk/core:bootstrapQualifier": "bls",
+    "aws-cdk:assets:bucketName": "quest-part-4-02"
+  }
+}
