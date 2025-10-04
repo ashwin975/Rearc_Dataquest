@@ -36,7 +36,7 @@ Links to data in S3 :
 - [pr.sector](https://bls-sync-data-ashwin.s3.us-east-1.amazonaws.com/bls-datasets/pr.data.0.Current/pr.sector)
 - [pr.duration](https://bls-sync-data-ashwin.s3.us-east-1.amazonaws.com/bls-datasets/pr.data.0.Current/pr.duration)
 - [pr.footnote](https://bls-sync-data-ashwin.s3.us-east-1.amazonaws.com/bls-datasets/pr.data.0.Current/pr.footnote)
-- [pr.contacts]([s3://bls-sync-data-ashwin/bls-datasets](https://bls-sync-data-ashwin.s3.us-east-1.amazonaws.com/bls-datasets/pr.contacts)
+- [pr.contacts](https://bls-sync-data-ashwin.s3.us-east-1.amazonaws.com/bls-datasets/pr.contacts)
 - [pr.data.0.Current](https://bls-sync-data-ashwin.s3.us-east-1.amazonaws.com/bls-datasets/pr.data.0.Current)
 - [pr.data.1.AllData](https://bls-sync-data-ashwin.s3.us-east-1.amazonaws.com/bls-datasets/pr.data.1.AllData)
 - [pr.class](s3://bls-sync-data-ashwin/bls-datasets/pr.class)
