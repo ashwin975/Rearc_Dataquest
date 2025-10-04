@@ -1,9 +1,6 @@
 # Rearc Data Quest
-# Rearc Data Quest
 
 A hands-on, end-to-end data engineering project that ingests public datasets, lands them in S3, and runs a lightweight serverless pipeline (Lambdas, SQS, EventBridge) provisioned via AWS CDK.
-
----
 
 ## Table of Contents
 - [Overview](#overview)
