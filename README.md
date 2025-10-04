@@ -49,9 +49,6 @@ Public datasets are fetched from BLS URL and published to S3 bucket. The sync sc
 - Prefix bls/pr/ to organize objects cleanly and enable simple lifecycle rules down the road.
 - Streamed I/O (no local disk usage)
 - Setup does not throw 403 error and is compliant with BLS data access policies
-
-**S3 Bucket Configurations**
-- Chose General Purpose Bucket
 - Added Tags: Project=RearcDataQuest for better Data Governance and cost monitor
 - Enabled versioning for traceability and rollbacks
 - Used SSE-S3 for encryption (since its safe for public data). Will switch to SSE-KMS for sensitive data.
