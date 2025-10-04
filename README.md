@@ -11,14 +11,14 @@ A hands-on, end-to-end data engineering project that ingests public datasets, la
   - [Part 4 — IaC with AWS CDK](#part-4--iac-with-aws-cdk)
 - [Proof of Execution](#proof-of-execution)
 - [Operational Notes](#operational-notes)
-
+  
 ## Overview
 
 - **Automated ingestion** of public datasets (BLS *time.series/pr* and a population dataset)
 - **Durable landing** in an S3 Buckets and server-side encryption
 - **Event-driven processing** using S3 notifications → SQS → Lambda.
 - **Infrastructure as Code** using AWS CDK to define and deploy the pipeline.
-
+  
 ### Part 1 — BLS Data → S3
 **Goal:** Republish the BLS time.series/pr dataset to S3 and keep the S3 copy in sync with the source (no hard‑coded filenames, no duplicate uploads).
 
@@ -65,7 +65,7 @@ I would also add more file validation techniques. Currently the script only comp
 I would include a staging area like a \tmp folder to preprocess files or enable batch processing (If the files need to be zipped before upload or in other scenarios). But as of now, the script directly streams data into S3 since it is ideal for lightweight public datasets.
 Upload Result
 
-## Part 2
+### Part 2
 **Goal**: Fetch national population data from the DataUSA API and save the response as nation_population.json in S3.
 
 Source Code : [population.ipynb](https://github.com/ashwin975/Rearc_Dataquest/blob/main/part2/api_call.py)
