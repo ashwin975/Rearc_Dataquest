@@ -100,7 +100,7 @@ Right join - merged population dataset on year column
 
 ### Enhancements
 
-## Part 4 — IaC with AWS CDK
+### Part 4 — IaC with AWS CDK
 **Goal**: Automate the pipeline with IaC (CloudFormation/CDK/Terraform): schedule a Lambda to run Parts 1 & 2 daily, publish an SQS message when the JSON lands in S3, and trigger a Lambda that runs the Part 3 reports.
 
 ## Architecture
@@ -114,7 +114,6 @@ Right join - merged population dataset on year column
 
 > See `resources/` for screenshots and exported diagrams.
 
-# **Infrastructure as Code (IaC) and Automated Data Pipeline (CDK)** 
 Source Code : [CDK Stack](https://github.com/ashwin975/Rearc_Dataquest/blob/main/part4-wip/data_pipeline_stack.py)   
 
 ( All resources for this pipeline can be identified using tags: `Project: RearcDataQuest`) 
@@ -152,4 +151,5 @@ I have included a pipeline architecture diagram based on the resources deployed 
 For verification of specific resource configurations, all CDK output images are available in the [resources](/resources) folder
 
 ### Operational Notes
+
 
