@@ -106,6 +106,7 @@ Right join - merged population dataset on year column
 ## CHANGE PIPELINE NAME
 
 ## Architecture
+![Pipeline Architecture](https://github.com/ashwin975/Rearc_Dataquest/blob/main/part4-wip/Architecture101.svg)
 
 **Implemented flow**
 1. **EventBridge** triggers **Ingestion Lambda** daily.
