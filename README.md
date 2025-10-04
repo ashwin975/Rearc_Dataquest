@@ -52,7 +52,7 @@ Public datasets are fetched from BLS URL and published to S3 bucket. The sync sc
 
 **S3 Bucket Configurations**
 - Chose General Purpose Bucket
-- Added Tags: Project=RearcDataQuest
+- Added Tags: Project=RearcDataQuest for better Data Governance and cost monitor
 - Enabled versioning for traceability and rollbacks
 - Used SSE-S3 for encryption (since its safe for public data). Will switch to SSE-KMS for sensitive data.
 
@@ -120,7 +120,7 @@ Right join - merged population dataset on year column
 # **Infrastructure as Code (IaC) and Automated Data Pipeline (CDK)** 
 Source Code : [CDK Stack](https://github.com/ashwin975/Rearc_Dataquest/blob/main/part4-wip/data_pipeline_stack.py)   
 
-( All resources for this pipeline can be identified using tags: `Project: RearcDataQuest`) for better Data Governance and cost monitor
+( All resources for this pipeline can be identified using tags: `Project: RearcDataQuest`) 
 
 **AWS Resources Created**
 This CDK deployment creates the following AWS resources:
