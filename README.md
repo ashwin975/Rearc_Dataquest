@@ -107,18 +107,6 @@ Right join - merged population dataset on year column
 
 Source Code : [CDK Stack](https://github.com/ashwin975/Rearc_Dataquest/blob/main/part4-wip/data_pipeline_stack.py)   
 
-( All resources for this pipeline can be identified using tags: `Project: RearcDataQuest`) 
-
-**AWS Resources Created**
-This CDK deployment creates the following AWS resources:
-- **S3 Bucket:** `lambda-pipeline-data-bucket` - Stores BLS data files and population JSON data
-- **Lambda Functions:**
-  `data-ingestion-lambda` - Downloads and processes data from external APIs daily
-  `data-analysis-lambda` - Processes data when triggered by S3 events
-- **SQS Queue:** `data-processing-queue` - Queues messages when new data is uploaded to S3
-- **EventBridge Rule:** `daily-data-ingestion-trigger` - Triggers the ingestion Lambda daily
-- **IAM Roles:** Auto-generated roles with appropriate permissions for Lambda execution  
-
 Built a serverless data pipeline using CDK that automates:
 - **Data ingestion (Parts 1 & 2):** An EventBridge schedule triggers the Ingestion Lambda to fetch BLS `time.series/pr` files and the Population API response, streaming both directly to S3.
 - **Event-driven processing (Part 3):** An S3 `ObjectCreated` event on the `population/` prefix publishes to SQS.
