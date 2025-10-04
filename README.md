@@ -1,49 +1,33 @@
 # Rearc Data Quest
+# Rearc Data Quest
 
-Table of Contents
+A hands-on, end-to-end data engineering project that ingests public datasets, lands them in S3, and runs a lightweight serverless pipeline (Lambdas, SQS, EventBridge) provisioned via AWS CDK.
 
-Table of Contents
+---
 
-Overview
+## Table of Contents
+- [Overview](#overview)
+- [Architecture](#architecture)
+- [Repository Structure](#repository-structure)
+- [Prerequisites](#prerequisites)
+- [Setup & Usage](#setup--usage)
+  - [Part 1 — BLS Data → S3](#part-1--bls-data--s3)
+  - [Part 2 — Population API → S3](#part-2--population-api--s3)
+  - [Part 3 — Analysis & Joins](#part-3--analysis--joins)
+  - [Part 4 — IaC with AWS CDK](#part-4--iac-with-aws-cdk)
+- [Proof of Execution](#proof-of-execution)
+- [Operational Notes](#operational-notes)
+- [Roadmap](#roadmap)
 
-Architecture
-
-Repository Structure
-
-Prerequisites
-
-Setup & Usage
-
-Part 1 — BLS Data → S3
-
-Part 2 — Population API → S3
-
-Part 3 — Analysis & Joins
-
-Part 4 — IaC with AWS CDK
-
-Proof of Execution
-
-Operational Notes
-
-Roadmap
-
-License
-
-Overview
-
+## Overview
 This repository demonstrates:
 
-Automated ingestion of public datasets (BLS time.series/pr and a population dataset) without storing files locally.
+- **Automated ingestion** of public datasets (BLS *time.series/pr* and a population dataset) without storing files locally.
+- **Durable landing** in an S3 data lake with versioning and server-side encryption.
+- **Event-driven processing** using S3 notifications → SQS → Lambda.
+- **Infrastructure as Code** using AWS CDK to define and deploy the pipeline.
 
-Durable landing in an S3 data lake with versioning and server‑side encryption.
-
-Event‑driven processing using S3 notifications → SQS → Lambda.
-
-Infrastructure as Code using AWS CDK to define and deploy the pipeline.
-
-Tags: All resources are tagged for discoverability, e.g. Project: RearcDataQuest, Environment: dev.
-
+> **Tags:** All resources are tagged for discoverability, e.g. `Project: RearcDataQuest`, `Environment: dev`.
 
 ## Part 1
 
