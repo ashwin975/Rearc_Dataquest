@@ -54,13 +54,10 @@ Public datasets are fetched from BLS URL and published to S3 bucket. The sync sc
 - Used SSE-S3 for encryption (since its safe for public data). Will switch to SSE-KMS for sensitive data.
 
 ### Enhancements
-
-- I would add recursive traversal to explore nested directories within pr/ instead of just parsing the flat directory at /pub/time.series/pr/. I'd use a queue or stack-based approach to walk the entire time.series/pr/ tree (including subfolders and hidden index files) to avoid hitting recursion limits.
-- Can set up a retry strategy for the requests Session so it automatically handles timeouts and common network issues.
-- Implement idempotent uploads by writing files to bls/pr/_incoming/<file>.part first, verifying the size and hash, then copying to the final location bls/pr/<file> and deleting the .part file. This prevents half-written objects from appearing during interruptions.
-- Create a JSON event logs and store them in S3 to track upload metadata and key events like hash mismatches, upload successes or failures, and skipped files—this would really help with auditing
-- Can also include a staging area (like a /tmp folder) for preprocessing or batch operations when files need to be compressed or transformed, though the current approach of streaming directly to S3 works great for these lightweight public datasets
-- Setup observability hooks to send summary metrics (files_seen, files_uploaded, bytes_transferred, duration_ms) to CloudWatch at the end of each run for better monitoring and operational visibility
+- **Depth-first listing for `pr/`**: Walk the entire `time.series/pr/` tree (subfolders, hidden index files), not just the root listing, using a queue/stack to avoid recursion limits.
+- **Idempotency-Write**: Upload to `bls/pr/_incoming/<file>.part`, verify size+hash, then copy to `bls/pr/<file>` and delete the `.part`. Prevents half-written objects on interruptions.
+- **Event trail**: Append operational events to `bls/pr/_logs/ingest.jsonl` (start, skip, upload, verify, error) with timestamps and durations—easy to grep or query later.
+- **Observability hooks** (optional): Send a summary metric (files_seen, files_uploaded, bytes_transferred, duration_ms) to CloudWatch at the end of each run.
 
 ### Part 2 — Population API → S3
 **Goal**: Fetch national population data via API and save the response as nation_population.json in S3.
