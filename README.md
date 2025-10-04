@@ -145,6 +145,9 @@ Built a serverless data pipeline using CDK that automates:
  ![Enhanced_Pipeline](https://github.com/ashwin975/Rearc_Dataquest/blob/main/resources/Enhanced%20Databricks%20Architecture.svg)) 
 
 ### Outputs
+![Part1_CDK](https://github.com/ashwin975/Rearc_Dataquest/blob/main/part4-wip/Part1_cdk.jpg)
+![Part1_Part2_CDK](https://github.com/ashwin975/Rearc_Dataquest/blob/main/part4-wip/Part1_Part%202_CDK.jpg)
+![Part3_CDK](https://github.com/ashwin975/Rearc_Dataquest/blob/main/part4-wip/Part3_cdk.jpg)
 
 ### Operational Notes
 
