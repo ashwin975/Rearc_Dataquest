@@ -9,7 +9,7 @@ A hands-on, end-to-end data engineering project that ingests public datasets, la
   - [Part 2 — Population API → S3](#part-2--population-api--s3)
   - [Part 3 — Analysis & Joins](#part-3--analysis--joins)
   - [Part 4 — IaC with AWS CDK](#part-4--iac-with-aws-cdk)
-- [Proof of Execution](#proof-of-execution)
+- [Outputs](#proof-of-execution)
 - [Operational Notes](#operational-notes)
   
 ## Overview
@@ -144,9 +144,9 @@ Built a serverless data pipeline using CDK that automates:
 
  ![Enhanced_Pipeline](https://github.com/ashwin975/Rearc_Dataquest/blob/main/resources/Enhanced%20Databricks%20Architecture.svg)) 
 
-### Proof of Execution
+### Outputs
 I have included a pipeline architecture diagram based on the resources deployed by the CDK infrastructure. 
-For verification of specific resource configurations, all CDK output images are available in the [resources](/resources) folder
+For verification of specific resource configurations, all CDK output images are available in the [resources](/outputs) folder
 
 ### Operational Notes
 
