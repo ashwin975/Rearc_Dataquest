@@ -144,8 +144,6 @@ Built a serverless data pipeline using CDK that automates:
 
  ![Enhanced_Pipeline](https://github.com/ashwin975/Rearc_Dataquest/blob/main/resources/Enhanced%20Databricks%20Architecture.svg)) 
 
-## TAKE SCREENSHOTS FOR PROOF OF EXECUTION AND PUT IT IN SEPERATE FOLDER AND LINK THEM HERE
-
 ### Proof of Execution
 I have included a pipeline architecture diagram based on the resources deployed by the CDK infrastructure. 
 For verification of specific resource configurations, all CDK output images are available in the [resources](/resources) folder
