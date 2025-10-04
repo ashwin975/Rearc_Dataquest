@@ -66,7 +66,7 @@ Public datasets are fetched from BLS URL and published to S3 bucket. The sync sc
 - Setup observability hooks to send summary metrics (files_seen, files_uploaded, bytes_transferred, duration_ms) to CloudWatch at the end of each run for better monitoring and operational visibility
 
 ### Part 2
-**Goal**: Fetch national population data from the DataUSA API and save the response as nation_population.json in S3.
+**Goal**: Fetch national population data via API and save the response as nation_population.json in S3.
 
 Source Code : [population.ipynb](https://github.com/ashwin975/Rearc_Dataquest/blob/main/part2/api_call.py)
 
@@ -80,19 +80,17 @@ Similar enhancements as in Part 1 would be sufficient
 ### Part 3
 **Goal**: US population mean & standard deviation for 2013–2018, find the best year (max annual sum of value) per series_id in pr.data.0.Current, and join to report value for series_id=PRS30006032, period=Q01 with population for that year.
 
-## CHANGE FORMAT AND VALUES 
-
 Source Code : [population.ipynb](https://github.com/ashwin975/Rearc_Dataquest/blob/main/part%203/data_analysis.ipynb)
 
-1. Calculated US population summary (2013-2018)
+1. US population summary (2013-2018)
 
 Mean : 322069808.0
 Standard Deviation : 4158441.04
 
-2. Best Year by Series ID
+2. Best Years by Series ID
 
-Parsed pr.data.0.Current into a dataframe
-Grouped data by Series ID and Year and calculated sum of values
+Put the pr.data.0.Current into a dataframe
+Grouped data by Series ID and Year and calculated sum 
 Identified best year for each Series ID
 
 3. Population mapping for specified series and period
