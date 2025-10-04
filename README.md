@@ -151,4 +151,8 @@ Built a serverless data pipeline using CDK that automates:
 
 ### Operational Notes
 
-
+- Additionaly, I tested Docker Containerization on Part 4 without the CDK, 
+- Docker image: I wrapped Python, needed libraries, handler.py, and settings into a single container, so it runs the same on my laptop and in AWS Lambda.
+- handler.py does: grabs BLS data, checks if files changed, uploads new/updated ones to S3, and can also pull from a second API if enabled.
+- Dependencies: listed in requirements.txt so everything gets installed during the image build.
+- Local Lambda: the Lambda Runtime Interface Emulator (RIE) lets me test the function locally just like AWS Lambda would run it.
