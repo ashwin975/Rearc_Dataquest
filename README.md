@@ -20,27 +20,26 @@ A hands-on, end-to-end data engineering project that ingests public datasets, la
 - **Infrastructure as Code** using AWS CDK to define and deploy the pipeline.
   
 ### Part 1 — BLS Data → S3
+**Goal:** Republish the BLS time.series/pr dataset to S3 and keep the S3 copy in sync with the source (no hard‑coded filenames, no duplicate uploads).
 
-- **Goal:** Republish the BLS time.series/pr dataset to S3 and keep the S3 copy in sync with the source (no hard‑coded filenames, no duplicate uploads).
+Source Code : [population.ipynb](https://github.com/ashwin975/Rearc_Dataquest/blob/main/Part%201/Part-1.ipynb)
 
-- Source Code : [population.ipynb](https://github.com/ashwin975/Rearc_Dataquest/blob/main/Part%201/Part-1.ipynb)
+**Description**: The Python script lists files under BLS time.series/pr, streams each file, and uploads it to s3 Bucket without using local temp storage. The script skips keys that already exist (to avoid duplicates on re-runs) and logs attempted/skipped/uploaded counts for validation.
 
-- **Description**: The Python script lists files under BLS time.series/pr, streams each file, and uploads it to s3 Bucket without using local temp storage. The script skips keys that already exist (to avoid duplicates on re-runs) and logs attempted/skipped/uploaded counts for validation.
-
-- Links to data in S3 :
+Links to data in S3 :
 
 - [pr.series](https://rearc-data-quest-ssm.s3.us-east-2.amazonaws.com/bls/pr/pr.series)
-pr.txt
-pr.measure
-pr.period
-pr.seasonal
-pr.sector
-pr.duration
-pr.footnote
-pr.contacts
-pr.data.0.Current
-pr.data.1.AllData
-pr.class
+- [pr.txt](https://bls-sync-data-ashwin.s3.us-east-1.amazonaws.com/bls-datasets/pr.data.0.Current/pr.txt)
+- [pr.measure](https://bls-sync-data-ashwin.s3.us-east-1.amazonaws.com/bls-datasets/pr.data.0.Current/pr.measure)
+- [pr.period](https://bls-sync-data-ashwin.s3.us-east-1.amazonaws.com/bls-datasets/pr.data.0.Current/pr.period)
+- [pr.seasonal](https://bls-sync-data-ashwin.s3.us-east-1.amazonaws.com/bls-datasets/pr.data.0.Current/pr.seasonal)
+- [pr.sector](https://bls-sync-data-ashwin.s3.us-east-1.amazonaws.com/bls-datasets/pr.data.0.Current/pr.sector)
+- [pr.duration](https://bls-sync-data-ashwin.s3.us-east-1.amazonaws.com/bls-datasets/pr.data.0.Current/pr.duration)
+- [pr.footnote](https://bls-sync-data-ashwin.s3.us-east-1.amazonaws.com/bls-datasets/pr.data.0.Current/pr.footnote)
+- [pr.contacts]([s3://bls-sync-data-ashwin/bls-datasets](https://bls-sync-data-ashwin.s3.us-east-1.amazonaws.com/bls-datasets/pr.data.0.Current)/pr.contacts)
+- [pr.data.0.Current](https://bls-sync-data-ashwin.s3.us-east-1.amazonaws.com/bls-datasets/pr.data.0.Current)
+- [pr.data.1.AllData](https://bls-sync-data-ashwin.s3.us-east-1.amazonaws.com/bls-datasets/pr.data.1.AllData)
+- [pr.class](s3://bls-sync-data-ashwin/bls-datasets/pr.class)
 
 **Highlights**
 
@@ -67,7 +66,6 @@ I would include a staging area like a \tmp folder to preprocess files or enable 
 Upload Result
 
 ### Part 2
-
 **Goal**: Fetch national population data from the DataUSA API and save the response as nation_population.json in S3.
 
 Source Code : [population.ipynb](https://github.com/ashwin975/Rearc_Dataquest/blob/main/part2/api_call.py)
