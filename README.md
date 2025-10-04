@@ -101,9 +101,7 @@ Right join - merged population dataset on year column
 ### Enhancements
 
 ## Part 4 — IaC with AWS CDK
-**Goal**: Automate the pipeline with IaC (CloudFormation/CDK/Terraform): schedule a Lambda to run Parts 1 & 2 daily, publish an SQS message when the JSON lands in S3, and trigger a Lambda that runs the Part 3 reports (logging results is sufficient).
-
-## CHANGE PIPELINE NAME
+**Goal**: Automate the pipeline with IaC (CloudFormation/CDK/Terraform): schedule a Lambda to run Parts 1 & 2 daily, publish an SQS message when the JSON lands in S3, and trigger a Lambda that runs the Part 3 reports.
 
 ## Architecture
 ![Pipeline Architecture](https://github.com/ashwin975/Rearc_Dataquest/blob/main/part4-wip/Architecture101.svg)
@@ -142,10 +140,10 @@ Built a serverless data pipeline using CDK that automates:
 ![Part4_pipeline](/resources/Part4_pipeline.png)
 
 ### Enhancements/Future Hardening
-- Bronze/Silver/Gold zones across buckets
-- DLQs + SNS alerts for failures
-- QuickSight dashboards for reporting
-- Private subnets / VPC endpoints
+- Bronze/Silver/Gold layers using Databricks
+- Autoloader acting as File watcher to append new data from Silver layer
+- Power BI dashboards for reporting
+- Private subnets / VPC endpoints for better security
 
  ![Enhanced_Pipeline](/resources/Enhanced_Part4_Pipeline.png) 
 
