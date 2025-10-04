@@ -56,14 +56,18 @@ Public datasets are fetched from BLS URL and published to `rearc-data-quest-ssm`
 - Enabled versioning for traceability and rollbacks
 - Used SSE-S3 for encryption (since its safe for public data). Will switch to SSE-KMS for sensitive data.
 
-### If I had time, I will?
+### Enhancements
 
+- **Depth-first listing for `pr/`**: Walk the entire `time.series/pr/` tree (subfolders, hidden index files), not just the root listing, using a queue/stack to avoid recursion limits.
+- **Observability hooks** (optional): Send a summary metric (files_seen, files_uploaded, bytes_transferred, duration_ms) to CloudWatch at the end of each run.
+- **Idempotency Write**: Upload to `bls/pr/_incoming/<file>.part`, verify size+hash, then copy to `bls/pr/<file>` and delete the `.part`. Prevents half-written objects on interruptions.
 I would add recursive search for nested directores inside the pr/ directory. Currently the script parses the flat directory at /pub/time.series/pr/ but I would implement recursive traversal for potential subfolders within pr/ path
 I would use retry strategy for request Session. This would enable automatic retries on time-out issues or other common network errors.
-I would implement and store log.csv file in S3 to append metadata about uploads and structured events (like hash mismatch, upload success/failure, skipped files etc). This would improve auditing
+I would implement event trail JSON log and store file in S3 to append metadata about uploads and structured events (like hash mismatch, upload success/failure, skipped files etc). This would improve auditing
 I would also add more file validation techniques. Currently the script only compares hash of files in source and datalake but I'd expand it to include file size comparison, last modified timestamps and possibly a checksum strategy for byte comparison.
 I would include a staging area like a \tmp folder to preprocess files or enable batch processing (If the files need to be zipped before upload or in other scenarios). But as of now, the script directly streams data into S3 since it is ideal for lightweight public datasets.
 Upload Result
+
 
 ### Part 2
 **Goal**: Fetch national population data from the DataUSA API and save the response as nation_population.json in S3.
@@ -74,7 +78,7 @@ Source Code : [population.ipynb](https://github.com/ashwin975/Rearc_Dataquest/bl
 
 Link to data in S3 : [nation_population.json](https://api-call-ashwin.s3.us-east-1.amazonaws.com/api-data/population.json)
 
-### If I had time, I will?
+### Enhancements
 Since Part 1 and Part 2 have the same functionality, I would implement the enhancements listed in part 1 like retry for request Session, have a metadata logging file and possibly include a staging area
 
 
@@ -102,7 +106,7 @@ Question 3 : Population mapping for specified series and period
 Filtered pr.data.0.Current for series_id = PRS30006032 and period = Q01
 Right merge population dataset on year column
 
-### If I had time, I will?
+### Enhancements
 
 ## Part 4
 **Goal**: Automate the pipeline with IaC (CloudFormation/CDK/Terraform): schedule a Lambda to run Parts 1 & 2 daily, publish an SQS message when the JSON lands in S3, and trigger a Lambda that runs the Part 3 reports (logging results is sufficient).
@@ -170,7 +174,7 @@ Built a serverless data pipeline using CDK that automates:
 - QuickSight dashboards for reporting
 - Private subnets / VPC endpoints
 
-**Future Optimizations**  
+### Enhancements 
 - **Data Architecture**: I would implement `Bronze/Silver/Gold` data layers across separate S3 buckets for improved data quality and lineage tracking
 - **Error Handling & Monitoring**: I would add `DLQ` for failed messages and `SNS` notifications for real-time pipeline failure alerts  
 - **Reporting**: I would integrate `Amazon QuickSight` for interactive dashboards and user-friendly reporting
