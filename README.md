@@ -19,12 +19,12 @@ A hands-on, end-to-end data engineering project that ingests public datasets, la
 ## Overview
 This repository demonstrates:
 
-- **Automated ingestion** of public datasets (BLS *time.series/pr* and a population dataset) without storing files locally.
-- **Durable landing** in an S3 data lake with versioning and server-side encryption.
+- **Automated ingestion** of public datasets (BLS *time.series/pr* and a population dataset)
+- **Durable landing** in an S3 Buckets and server-side encryption (Could Haves - Versioning) 
 - **Event-driven processing** using S3 notifications → SQS → Lambda.
 - **Infrastructure as Code** using AWS CDK to define and deploy the pipeline.
 
-> **Tags:** All resources are tagged for discoverability, e.g. `Project: RearcDataQuest`, `Environment: dev`.
+> Could Haves - **Tags:** All resources are tagged for discoverability, e.g. `Project: RearcDataQuest`, `Environment: dev`.
 
 ## Part 1
 
