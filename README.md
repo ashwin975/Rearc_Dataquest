@@ -72,7 +72,7 @@ Source Code : [population.ipynb](https://github.com/ashwin975/Rearc_Dataquest/bl
 
 **Description**: The Python script requests national population data from the public API and writes the raw JSON to S3 Bucket. The script uses a simple request header, performs a basic non-empty payload check, and also logs whether the object was created or updated.
 
-Link to data in S3 : nation_population.json
+Link to data in S3 : [nation_population.json](https://api-call-ashwin.s3.us-east-1.amazonaws.com/api-data/population.json)
 
 ### If I had time, I will?
 Since Part 1 and Part 2 have the same functionality, I would implement the enhancements listed in part 1 like retry for request Session, have a metadata logging file and possibly include a staging area
