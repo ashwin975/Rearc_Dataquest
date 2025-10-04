@@ -142,7 +142,7 @@ Built a serverless data pipeline using CDK that automates:
 - Power BI dashboards for reporting
 - Private subnets / VPC endpoints for better security
 
- ![Enhanced_Pipeline](https://github.com/ashwin975/Rearc_Dataquest/blob/main/resources/Enhanced%20Databricks%20Architecture.svg)) 
+ ![Enhanced_Pipeline](https://github.com/ashwin975/Rearc_Dataquest/blob/main/part4-wip/Enhanced%20Databricks%20Architecture.svg)
 
 ### Outputs
 ![Part1_CDK](https://github.com/ashwin975/Rearc_Dataquest/blob/main/part4-wip/Part1_cdk.jpg)
