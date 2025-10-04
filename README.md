@@ -137,8 +137,6 @@ Built a serverless data pipeline using CDK that automates:
 - **Daily cadence:** The schedule is managed by EventBridge; parameterize cron/rate in the stack for easy changes.
 - **Source layout:** See the CDK app and Lambda code under `part4-wip/` in this repository.
 
-![Part4_pipeline](/resources/Part4_pipeline.png)
-
 ### Enhancements/Future Hardening
 - Bronze/Silver/Gold layers using Databricks
 - Autoloader acting as File watcher to append new data from Silver layer
@@ -149,8 +147,9 @@ Built a serverless data pipeline using CDK that automates:
 
 ## TAKE SCREENSHOTS FOR PROOF OF EXECUTION AND PUT IT IN SEPERATE FOLDER AND LINK THEM HERE
 
-**Outputs & Proof of Execution**  
-I have included a pipeline architecture diagram based on the resources deployed by the CDK infrastructure. For verification of specific resource configurations, all CDK output images are available in the [resources](/resources) folder with the `Part4` prefix.
+### Proof of Execution
+I have included a pipeline architecture diagram based on the resources deployed by the CDK infrastructure. 
+For verification of specific resource configurations, all CDK output images are available in the [resources](/resources) folder
 
-![Output_Proof](/resources/Output_Proof.jpeg)
+### Operational Notes
 
