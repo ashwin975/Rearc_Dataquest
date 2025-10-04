@@ -4,9 +4,6 @@ A hands-on, end-to-end data engineering project that ingests public datasets, la
 
 ## Table of Contents
 - [Overview](#overview)
-- [Architecture](#architecture)
-- [Repository Structure](#repository-structure)
-- [Prerequisites](#prerequisites)
 - [Setup & Usage](#setup--usage)
   - [Part 1 — BLS Data → S3](#part-1--bls-data--s3)
   - [Part 2 — Population API → S3](#part-2--population-api--s3)
@@ -20,13 +17,16 @@ A hands-on, end-to-end data engineering project that ingests public datasets, la
 This repository demonstrates:
 
 - **Automated ingestion** of public datasets (BLS *time.series/pr* and a population dataset)
-- **Durable landing** in an S3 Buckets and server-side encryption (Could Haves - Versioning) 
+- **Durable landing** in an S3 Buckets and server-side encryption (Could Haves - 
 - **Event-driven processing** using S3 notifications → SQS → Lambda.
 - **Infrastructure as Code** using AWS CDK to define and deploy the pipeline.
 
-> Could Haves - **Tags:** All resources are tagged for discoverability, e.g. `Project: RearcDataQuest`, `Environment: dev`.
+> Could Haves -
+>   1. **Versioning** - S3 Buckets (Benefits: Roll Backs, Audit Trail) 
+>   2. **Tags:** All resources are tagged for discoverability, e.g. `Project: RearcDataQuest`, `Environment: dev`. (Benefits - Cost Monitor, Data Governance)
 
-## Part 1
+### Part 1 — BLS Data → S3
+**Goal:** Republish the BLS time.series/pr dataset to S3 and keep the S3 copy in sync with the source (no hard‑coded filenames, no duplicate uploads).
 
 Links to data in S3 :
 Source Code : Source Code : population.ipynb
@@ -44,22 +44,22 @@ pr.data.0.Current
 pr.data.1.AllData
 pr.class
 
-
 ## Gist on what the script is doing and my bucket configs and why I chose those configurations, mention tag if used. Paste an image output of this s3 bucket.
 
+**Highlights**
 Public datasets are fetched from BLS URL and published to `rearc-data-quest-ssm` S3 bucket. The sync script ensures:
-- Files are dynamically discovered
-- Duplicates are avoided
-- Files are streamed directly to S3 without local storage
+- Dynamic file discovery (no hard-coded filenames)
+- Duplicate-aware uploads (hash check)
+- Streamed I/O (no local disk usage)
 - Setup does not throw 403 error and is compliant with BLS data access policies
 
 **S3 Bucket Configurations**
 - Chose General Purpose Bucket
-- Added a RearcDataQuest project tag
+- Added Tags: Project=RearcDataQuest
 - Enabled versioning for traceability and rollbacks
 - Used SSE-S3 for encryption (since its safe for public data). Will switch to SSE-KMS for sensitive data.
 
-## If I had time, I will?
+### If I had time, I will?
 
 I would add recursive search for nested directores inside the pr/ directory. Currently the script parses the flat directory at /pub/time.series/pr/ but I would implement recursive traversal for potential subfolders within pr/ path
 I would use retry strategy for request Session. This would enable automatic retries on time-out issues or other common network errors.
@@ -69,18 +69,19 @@ I would include a staging area like a \tmp folder to preprocess files or enable 
 Upload Result
 
 
-
 ## Part 2
+**Goal**: Fetch national population data from the DataUSA API and save the response as nation_population.json in S3.
+
 Source Code : population.ipynb
 
 Link to data in S3 : nation_population.json
 
-Future Continous Improvement (Find synonym)
-
+### If I had time, I will?
 Since Part 1 and Part 2 have the same functionality, I would implement the enhancements listed in part 1 like retry for request Session, have a metadata logging file and possibly include a staging area
 
 
 ## Part 3
+**Goal**: US population mean & standard deviation for 2013–2018, find the best year (max annual sum of value) per series_id in pr.data.0.Current, and join to report value for series_id=PRS30006032, period=Q01 with population for that year (deliver as a .ipynb).
 
 ## CHANGE FORMAT AND VALUES 
 
@@ -91,19 +92,34 @@ Question 1 : Calculated US population summary (2013-2018)
 
 Mean : 317437383.0
 Standard Deviation : 4257089.54
+
 Question 2 : Best Year by Series ID
 
 Parsed pr.data.0.Current into a dataframe
 Grouped data by Series ID and Year and calculated sum of values
 Identified best year for each Series ID
+
 Question 3 : Population mapping for specified series and period
 
 Filtered pr.data.0.Current for series_id = PRS30006032 and period = Q01
 Right merge population dataset on year column
 
+### If I had time, I will?
+
 ## Part 4
+**Goal**: Automate the pipeline with IaC (CloudFormation/CDK/Terraform): schedule a Lambda to run Parts 1 & 2 daily, publish an SQS message when the JSON lands in S3, and trigger a Lambda that runs the Part 3 reports (logging results is sufficient).
 
 ## CHANGE PIPELINE NAME
+
+## Architecture
+
+**Implemented flow**
+1. **EventBridge** triggers **Ingestion Lambda** daily.
+2. Lambda streams **BLS time.series/pr** files and **Population API** output directly to **S3** (no local temp storage).
+3. When a new population JSON lands in S3, an **S3 event** notifies **SQS**.
+4. **Analysis Lambda** is invoked by SQS, reads both datasets from S3, computes summary stats & joins, and logs results.
+
+> See `resources/` for screenshots and exported diagrams.
 
 # **Infrastructure as Code (IaC) and Automated Data Pipeline (CDK)** 
 Source Code : [CDK Stack](./part4_aws_cdk/part4_aws_cdk_stack.py)    
@@ -149,6 +165,12 @@ Built a serverless data pipeline using CDK that automates:
 - **Analytics & Reporting**: The analytics Lambda reads both datasets, computes population statistics (mean/std dev for 2013-2018), identifies the best performing year by series ID, creates a joined report for series `PRS30006032` with population data, and logs all results.
 
 ![Part4_pipeline](/resources/Part4_pipeline.png)
+
+**Future hardening (planned)**
+- Bronze/Silver/Gold zones across buckets
+- DLQs + SNS alerts for failures
+- QuickSight dashboards for reporting
+- Private subnets / VPC endpoints
 
 **Future Optimizations**  
 - **Data Architecture**: I would implement `Bronze/Silver/Gold` data layers across separate S3 buckets for improved data quality and lineage tracking
