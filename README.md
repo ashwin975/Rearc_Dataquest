@@ -12,7 +12,7 @@ A hands-on, end-to-end data engineering project that ingests public datasets, la
 - [Proof of Execution](#proof-of-execution)
 - [Operational Notes](#operational-notes)
 
-## Context Overview
+## Overview
 
 - **Automated ingestion** of public datasets (BLS *time.series/pr* and a population dataset)
 - **Durable landing** in an S3 Buckets and server-side encryption
