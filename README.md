@@ -77,7 +77,7 @@ Link to data in S3 : [nation_population.json](https://api-call-ashwin.s3.us-east
 ### Enhancements
 Similar enhancements as in Part 1 would be sufficient
 
-## Part 3
+### Part 3
 **Goal**: US population mean & standard deviation for 2013–2018, find the best year (max annual sum of value) per series_id in pr.data.0.Current, and join to report value for series_id=PRS30006032, period=Q01 with population for that year.
 
 ## CHANGE FORMAT AND VALUES 
@@ -119,8 +119,6 @@ Right join - merged population dataset on year column
 
 # **Infrastructure as Code (IaC) and Automated Data Pipeline (CDK)** 
 Source Code : [CDK Stack](https://github.com/ashwin975/Rearc_Dataquest/blob/main/part4-wip/data_pipeline_stack.py)   
-
-# MENTION TAGGING 
 
 ( All resources for this pipeline can be identified using tags: `Project: RearcDataQuest`) for better Data Governance and cost monitor
 
