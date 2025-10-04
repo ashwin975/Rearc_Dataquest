@@ -20,6 +20,7 @@ A hands-on, end-to-end data engineering project that ingests public datasets, la
 - **Infrastructure as Code** using AWS CDK to define and deploy the pipeline.
   
 ### Part 1 — BLS Data → S3
+
 **Goal:** Republish the BLS time.series/pr dataset to S3 and keep the S3 copy in sync with the source (no hard‑coded filenames, no duplicate uploads).
 
 Source Code : [population.ipynb](https://github.com/ashwin975/Rearc_Dataquest/blob/main/Part%201/Part-1.ipynb)
@@ -66,6 +67,7 @@ I would include a staging area like a \tmp folder to preprocess files or enable 
 Upload Result
 
 ### Part 2
+
 **Goal**: Fetch national population data from the DataUSA API and save the response as nation_population.json in S3.
 
 Source Code : [population.ipynb](https://github.com/ashwin975/Rearc_Dataquest/blob/main/part2/api_call.py)
