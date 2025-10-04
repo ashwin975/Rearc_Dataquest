@@ -2,6 +2,8 @@
 
 Table of Contents
 
+Table of Contents
+
 Overview
 
 Architecture
@@ -25,6 +27,22 @@ Proof of Execution
 Operational Notes
 
 Roadmap
+
+License
+
+Overview
+
+This repository demonstrates:
+
+Automated ingestion of public datasets (BLS time.series/pr and a population dataset) without storing files locally.
+
+Durable landing in an S3 data lake with versioning and server‑side encryption.
+
+Event‑driven processing using S3 notifications → SQS → Lambda.
+
+Infrastructure as Code using AWS CDK to define and deploy the pipeline.
+
+Tags: All resources are tagged for discoverability, e.g. Project: RearcDataQuest, Environment: dev.
 
 
 ## Part 1
