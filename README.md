@@ -42,6 +42,7 @@ pr.data.1.AllData
 pr.class
 
 **Highlights**
+
 Public datasets are fetched from BLS URL and published to `rearc-data-quest-ssm` S3 bucket. The sync script ensures:
 - Dynamic file discovery (no hard-coded filenames)
 - Duplicate-aware uploads (hash check)
