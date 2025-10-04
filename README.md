@@ -107,11 +107,11 @@ Right join - merged population dataset on year column
 
 Source Code : [CDK Stack](https://github.com/ashwin975/Rearc_Dataquest/blob/main/part4-wip/data_pipeline_stack.py)   
 
-Built a serverless data pipeline using CDK that automates:
+Pipeline Architecture and Execution
 - **Data ingestion (Parts 1 & 2):** An EventBridge schedule triggers the Ingestion Lambda to fetch BLS `time.series/pr` files and the Population API response, streaming both directly to S3.
 - **Event-driven processing (Part 3):** An S3 `ObjectCreated` event on the `population/` prefix publishes to SQS.
   - The [Ingest Lambda](https://github.com/ashwin975/Rearc_Dataquest/blob/main/part4-wip/lambdas/ingest/handler.py) consumes the message, reads both datasets from S3, performs the       required stats/join, and writes results to CloudWatch Logs (file outputs to S3 planned).
-  - The [Analysis Lambda](https://github.com/ashwin975/Rearc_Dataquest/blob/main/part4-wip/lambdas/report/handler.py) triggers SQS messages published by S3 `ObjectCreated:*` events on the `population/` prefix. Then Reads the population JSON and required BLS objects from S3, computes the Part 3 outputs (population stats, best year per `series_id`, and the join for `PRS30006032`/`Q01`), and **logs** results to CloudWatch Logs.
+  - The [Report Lambda](https://github.com/ashwin975/Rearc_Dataquest/blob/main/part4-wip/lambdas/report/handler.py) triggers SQS messages published by S3 `ObjectCreated:*` events on the `population/` prefix. Then Reads the population JSON and required BLS objects from S3, computes the Part 3 outputs (population stats, best year per `series_id`, and the join for `PRS30006032`/`Q01`), and **logs** results to CloudWatch Logs.
 - **Daily cadence:** The schedule is managed by EventBridge; parameterize cron/rate in the stack for easy changes.
 - **Source layout:** See the CDK app and Lambda code under `part4-wip/` in this repository.
 
