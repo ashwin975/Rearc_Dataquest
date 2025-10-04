@@ -57,7 +57,7 @@ Public datasets are fetched from BLS URL and published to S3 bucket. The sync sc
 - **Depth-first listing for `pr/`**: Walk the entire `time.series/pr/` tree (subfolders, hidden index files), not just the root listing, using a queue/stack to avoid recursion limits.
 - **Idempotency-Write**: Upload to `bls/pr/_incoming/<file>.part`, verify size+hash, then copy to `bls/pr/<file>` and delete the `.part`. Prevents half-written objects on interruptions.
 - **Event trail**: Append operational events to `bls/pr/_logs/ingest.jsonl` (start, skip, upload, verify, error) with timestamps and durations—easy to grep or query later.
-- **Observability hooks** (optional): Send a summary metric (files_seen, files_uploaded, bytes_transferred, duration_ms) to CloudWatch at the end of each run.
+- **Observability hooks**: Send a summary metric (files_seen, files_uploaded, bytes_transferred, duration_ms) to CloudWatch at the end of each run.
 
 ### Part 2 — Population API → S3
 **Goal**: Fetch national population data via API and save the response as nation_population.json in S3.
