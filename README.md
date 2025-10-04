@@ -90,7 +90,6 @@ Identified best year for each Series ID
 Filtered pr.data.0.Current for series_id = PRS30006032 and period = Q01
 Right join - merged population dataset on year column
 
-### Enhancements
 
 ### Part 4 — IaC with AWS CDK
 **Goal**: Automate the pipeline with IaC (CloudFormation/CDK/Terraform): schedule a Lambda to run Parts 1 & 2 daily, publish an SQS message when the JSON lands in S3, and trigger a Lambda that runs the Part 3 reports.
