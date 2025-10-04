@@ -47,7 +47,6 @@ Public datasets are fetched from BLS URL and published to S3 bucket. The sync sc
 - Dynamic file discovery (no hard-coded filenames)
 - Duplicate-aware uploads (hash check)
 - Prefix bls/pr/ to organize objects cleanly and enable simple lifecycle rules down the road.
-- Streamed I/O (no local disk usage)
 - Setup does not throw 403 error and is compliant with BLS data access policies
 - Added Tags: Project=RearcDataQuest for better Data Governance and cost monitor
 - Enabled versioning for traceability and rollbacks
